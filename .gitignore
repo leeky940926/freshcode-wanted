@@ -194,4 +194,4 @@ tags
 # End of https://www.toptal.com/developers/gitignore/api/pycharm,vim,macos,visualstudiocode,linux
 my_settings.py
 
-.github
+.github 
