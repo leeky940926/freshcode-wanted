@@ -8,8 +8,15 @@ class Category(TimeStampModel):
     class Meta:
         db_table = 'categories'
 
+class Badge(TimeStampModel):
+    name = models.CharField(max_length = 50)
+    
+    class Meta:
+        db_table = 'badges'
+
 class Menu(TimeStampModel):
     category    = models.ForeignKey(Category, on_delete = models.CASCADE)
+    badge       = models.ForeignKey(Badge, on_delete = models.CASCADE)
     name        = models.CharField(max_length = 50)
     description = models.TextField()
     is_sold     = models.BooleanField(default = False)
@@ -17,13 +24,6 @@ class Menu(TimeStampModel):
     
     class Meta:
         db_table = 'menus'
-
-class Badge(TimeStampModel):
-    menu = models.ForeignKey(Menu, on_delete = models.CASCADE)
-    name = models.CharField(max_length = 50)
-    
-    class Meta:
-        db_table = 'badges'
 
 class Size(TimeStampModel):
     english_name = models.CharField(max_length = 50)
