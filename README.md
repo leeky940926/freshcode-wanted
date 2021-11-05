@@ -74,7 +74,7 @@
 
 ![image](https://user-images.githubusercontent.com/87896537/140478529-40255e4c-67b0-464b-8a92-361176166a4b.png)
 
-## Postman API
+## Postman API 명세서
 
 https://documenter.getpostman.com/view/17716434/UVC2H91e#intro
 
