@@ -178,7 +178,7 @@ DELETE /menus/items/{item_id}
 
 ## API TEST 방법
 
-### 1.  [해당 링크](https://grey-comet-304334.postman.co/workspace/freshcode~d93e7197-5ffb-40af-8ca6-1958ba5aef72/collection/17716434-cf3ad77a-f5a7-43c5-8605-635e6468d8c0?ctx=documentation)에 접속합니다
+### 1.  **[해당 링크](https://grey-comet-304334.postman.co/workspace/freshcode~d93e7197-5ffb-40af-8ca6-1958ba5aef72/collection/17716434-cf3ad77a-f5a7-43c5-8605-635e6468d8c0?ctx=documentation)**에 접속합니다
 
 ### 2. 우측 상단의 아이콘을 클릭하여, SERVER_URL의 주소를 확인합니다.
 
