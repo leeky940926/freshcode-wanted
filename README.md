@@ -79,7 +79,79 @@
 
 https://documenter.getpostman.com/view/17716434/UVC2H91e#intro
 
-## 기능 상세 설명
+## 구현사항 상세 설명
+
+### 로그인
+
+POST /users/login
+body key list : email, password
+
+* 로그인 시, jwt 토큰이 발행됩니다.
+
+* Unit Test
+
+### 메뉴 등록
+
+POST /menus
+body key list : category_id, tag_id, badge_id, name, description
+
+* 신규 상품을 등록하는 메뉴이며, 상품이 속하는 카테고리와 상품에 추가할 태그와 신상품을 표시해주기 위한 뱃지를 변수로 받습니다.
+
+* 상품명과 상품에 대한 설명을 입력합니다.
+
+* 해당 기능은 관리자계정만 다룰 수 있도록 설정되었으며, 일반유저가 접근 시 403에러가 발생합니다.
+
+* Unit Test
+
+### 메뉴 리스트 조회
+
+GET /menus?page={page}&category_id={category_id}
+
+* 리스트는 페이지네이션 기법을 사용하여 조회할 수 있도록 설정하였습니다.
+
+* page는 특정 페이지 버튼을 누를 때 이동할 페이지입니다.
+
+* 전체상품 조회 시, category_id를 입력하지 않으며, 특정 카테고리를 선택 시에만 변수를 받습니다.
+
+* Soft Delete기법을 사용하여 deleted_at이 null인 데이터만 조회됩니다.
+
+* Unit Test
+
+### 메뉴 상세 조회
+
+GET /menus/{menu_id}
+
+* 특정 상품을 클릭 시 정보를 보여줍니다.
+
+* 일반유저는 조회만 가능하고, 그 외 작업은 관리자만 할 수 있기 때문에 Role을 식별해주기 위한 login_decorator를 선언했습니다.
+
+* Soft Delete기법을 사용하여 deleted_at이 null인 데이터만 조회됩니다.
+
+* Unit Test
+
+### 메뉴 수정
+
+PATCH /menus/{menu_id}
+body key list : name, description
+
+* 상품을 수정을 할 수 있으며, 관리자만 수정할 수 있기 때문에 식별하기 위한 login_decorator를 선언했습니다.
+
+* HTTP Method를 PATCH를 사용함으로써, 유동적인 변경을 할 수 있게 설정하였습니다.
+
+* Unit Test
+
+### 메뉴 삭제
+
+DELETE /menus/{menu_id}
+
+* 상품을 삭제할 수 있으며, 관리자만 삭제할 수 있기 때문에 식별하기 위한 login_decorator를 선언했습니다.
+
+* Soft Delete기법을 사용하였으며, 삭제 시 삭제일자에 현재 날짜가 들어가도록 했습니다.
+
+* Unit Test
+
+
+
 
 ## API TEST 방법
 
@@ -105,37 +177,3 @@ https://documenter.getpostman.com/view/17716434/UVC2H91e#intro
 ### 5. send버튼이 활성화 되지 않거나, 문제가 발생할 경우 fork를 받아서 진행 부탁 드립니다.
 
 ![image](https://user-images.githubusercontent.com/88086271/140481893-0798b177-e179-476d-bdee-d1f73939d53e.png)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
