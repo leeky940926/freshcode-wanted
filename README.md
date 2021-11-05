@@ -7,8 +7,8 @@
 |이름|github|
 |---|--------|
 |김민호|https://github.com/maxkmh712|
-|김주형|깃헙주소|
-|박치훈|깃헙주소|
+|김주형|https://github.com/BnDC|
+|박치훈|https://github.com/chihunmanse|
 |박현우|깃헙주소|
 |이기용|https://github.com/leeky940926|
 |이정아|https://github.com/wjddk97|
