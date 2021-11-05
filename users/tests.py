@@ -14,14 +14,14 @@ class UserTest(TestCase) :
         )
 
         user = User.objects.create(
-            id       = 3,
+            id       = 1,
             email    = "test@test.com",
             password = "test",
             name     = "test name",
-            role_id  = Role.objects.get(id=1).id
+            role_id  = 1
         )
 
-        global headers
+        global headers, access_token
         access_token = jwt.encode({'id' : user.id}, SECRET_KEY, ALGORITHM)
         headers      = {'HTTP_Authorization': access_token}
 
@@ -37,14 +37,14 @@ class UserTest(TestCase) :
             "password" : "test"
         }
 
-        response = client.post('/users/login', json.dumps(login_info), content_type='application/json')
+        response = client.post('/users/login', json.dumps(login_info), content_type = 'application/json')
 
-        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json(),{
-            'token' : 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6M30.J9893j66hAExVsXvLT_Hl7JlJFwsSyrCM2W0BEeKIwk'
+            'token' : access_token
         })
 
-    def test_failure_key_error_login(self) :
+    def test_failure_key_error_login(self):
         client = Client()
 
         login_info = {
@@ -52,14 +52,24 @@ class UserTest(TestCase) :
             "passrd" : "test"
         }
 
-        response = client.post('/users/login', json.dumps(login_info), content_type='application/json')
+        response = client.post('/users/login', json.dumps(login_info), content_type = 'application/json')
 
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.json(),{
             'message' : 'KEY_ERROR'
         })
     
-    def test_failure_user_does_not_exist_login(self) :
+    def test_failure_json_decode_error_login(self):
+        client = Client()
+
+        response = client.post('/users/login')
+
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json(),{
+            'message' : 'JSON_DECODE_ERROR'
+        })
+    
+    def test_failure_invalid_user_login(self):
         client = Client() 
 
         login_info = {
@@ -71,10 +81,10 @@ class UserTest(TestCase) :
 
         self.assertEqual(response.status_code, 401)
         self.assertEqual(response.json(),{
-            'message' : 'USER_DOES_NOT_EXISTS'
+            'message' : 'INVALID_USER'
         })
         
-    def test_failure_invalid_password_login(self) :
+    def test_failure_invalid_password_login(self):
         client = Client()
         
         login_info = {
