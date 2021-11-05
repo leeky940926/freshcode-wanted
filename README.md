@@ -95,7 +95,7 @@ https://documenter.getpostman.com/view/17716434/UVC2H91e#intro
 
 ### 3. 정의된 예시에 따라 로그인을 진행하여 토큰을 발급받습니다.
 
-일반유저 : user@freshcode.me/user
+일반유저 : user@freshcode.me/user <br>
 관리계정 : admin@freshcode.me/admin
 
 ### 4. admin 계정으로 접속하여, 헤더에 발급받은 토큰을 입력해서 테스트를 진행하시면 됩니다.
