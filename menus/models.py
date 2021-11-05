@@ -14,9 +14,17 @@ class Badge(TimeStampModel):
     class Meta:
         db_table = 'badges'
 
+class Tag(TimeStampModel):
+    type = models.CharField(max_length = 100)
+    name = models.CharField(max_length = 100)
+    
+    class Meta:
+        db_table = 'tags'
+
 class Menu(TimeStampModel):
     category    = models.ForeignKey(Category, on_delete = models.CASCADE)
     badge       = models.ForeignKey(Badge, on_delete = models.CASCADE)
+    tags        = models.ManyToManyField(Tag, related_name = 'menus')
     name        = models.CharField(max_length = 50)
     description = models.TextField()
     is_sold     = models.BooleanField(default = False)
@@ -42,10 +50,3 @@ class Item(TimeStampModel):
     class Meta:
         db_table = 'items'
 
-class Tag(TimeStampModel):
-    menu = models.ForeignKey(Menu, on_delete = models.CASCADE)
-    type = models.CharField(max_length = 100)
-    name = models.CharField(max_length = 100)
-    
-    class Meta:
-        db_table = 'tags'
