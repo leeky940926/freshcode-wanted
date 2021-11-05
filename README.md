@@ -175,7 +175,8 @@ DELETE /menus/items/{item_id}
 * Unit Test 
 
 #### Unit Test 결과
-<img width="1429" alt="스크린샷 2021-11-04 오후 4 01 31" src="https://user-images.githubusercontent.com/61782539/140496077-469fdc20-3a76-4147-b482-c9bc683cf3dc.png">
+<img width="597" alt="스크린샷 2021-11-05 오후 5 31 34" src="https://user-images.githubusercontent.com/61782539/140496180-2735da02-2a20-4ac2-9fc9-ce1d21242010.png">
+
 
 
 ## API TEST 방법
