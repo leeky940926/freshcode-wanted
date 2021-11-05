@@ -174,6 +174,8 @@ DELETE /menus/items/{item_id}
 * Soft Delete기법을 사용하였으며, 삭제 시 삭제 시간에 현재 시간이 들어가도록 했습니다.
 * Unit Test 
 
+#### Unit Test 결과
+<img width="1429" alt="스크린샷 2021-11-04 오후 4 01 31" src="https://user-images.githubusercontent.com/61782539/140496077-469fdc20-3a76-4147-b482-c9bc683cf3dc.png">
 
 
 ## API TEST 방법
@@ -200,4 +202,6 @@ DELETE /menus/items/{item_id}
 ### 5. send버튼이 활성화 되지 않거나, 문제가 발생할 경우 fork를 받아서 진행 부탁 드립니다.
 
 ![image](https://user-images.githubusercontent.com/88086271/140481893-0798b177-e179-476d-bdee-d1f73939d53e.png)
+
+
 
