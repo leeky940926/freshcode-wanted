@@ -92,7 +92,7 @@ body key list : email, password
 
 ### 메뉴 등록
 
-POST /menus
+POST /menus <br>
 body key list : category_id, tag_id, badge_id, name, description
 
 * 신규 상품을 등록하는 메뉴이며, 상품이 속하는 카테고리와 상품에 추가할 태그와 신상품을 표시해주기 위한 뱃지를 변수로 받습니다.
@@ -131,7 +131,7 @@ GET /menus/{menu_id}
 
 ### 메뉴 수정
 
-PATCH /menus/{menu_id}
+PATCH /menus/{menu_id} <br>
 body key list : name, description
 
 * 상품을 수정을 할 수 있으며, 관리자만 수정할 수 있기 때문에 식별하기 위한 login_decorator를 선언했습니다.
@@ -150,6 +150,42 @@ DELETE /menus/{menu_id}
 
 * Unit Test
 
+### 상품 상세정보 추가
+
+POST /menus/items <br>
+body key list : menu_id, size_id, price
+
+* 관리자만 추가할 수 있기 때문에 식별하기 위한 login_decorator를 선언했습니다.
+
+* 대표메뉴의 상세정보를 추가하기 위한 메뉴입니다.
+
+* 특정 메뉴의 상세 아이템이기 때문에 menu_id를 받고, 메뉴마다 사이즈가 다르기 때문에 size_id를 받습니다.
+
+* 사이즈별 가격이 다르기 때문에 가격도 함께 입력 받습니다.
+
+* Unit Test
+
+### 상품 상세정보 수정
+
+PATCH /menus/items/{item_id} <br>
+body key list : size_id, price, is_sold
+
+* 관리자만 수정할 수 있기 때문에 식별하기 위한 login_decorator를 선언했습니다.
+
+* 수량관리를 통해 품절여부(is_sold)가 자동으로 바뀌어야 하지만,
+현 프로젝트에서는 수량에 대한 고려를 하지 않아, 수동으로 수정할 수 있게 설정하였습니다.
+
+* Unit Test
+
+### 상품 상세정보 삭제
+
+DELETE /menus/items/{item_id} 
+
+* 관리자만 삭제할 수 있기 때문에 식별하기 위한 login_decorator를 선언했습니다.
+
+* Soft Delete기법을 사용하였으며, 삭제 시 삭제일자에 현재 날짜가 들어가도록 했습니다.
+
+* Unit Test 
 
 
 
