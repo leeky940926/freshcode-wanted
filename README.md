@@ -72,7 +72,8 @@
 
 ## 모델링
 
-![image](https://user-images.githubusercontent.com/88086271/140482591-2cdd3a2c-0d4d-4b9f-8ea7-6af3337b25de.png)
+![image](https://user-images.githubusercontent.com/88086271/140482742-d494ecff-ec1c-4821-b101-0741f280647b.png)
+)
 
 ## Postman API 명세서
 
