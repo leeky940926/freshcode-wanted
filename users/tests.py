@@ -21,9 +21,8 @@ class UserTest(TestCase) :
             role_id  = 1
         )
 
-        global headers, access_token
+        global access_token
         access_token = jwt.encode({'id' : user.id}, SECRET_KEY, ALGORITHM)
-        headers      = {'HTTP_Authorization': access_token}
 
     def tearDown(self) :
         User.objects.all().delete()

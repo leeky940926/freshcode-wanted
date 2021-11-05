@@ -8,7 +8,7 @@ from django.http.response   import JsonResponse
 from django.db.models       import Q
 from django.db.models.query import Prefetch
 
-from menus.models           import Badge, Category, Menu, Item, Size
+from menus.models           import Badge, Category, Menu, Item, Size, Tag
 from users.utils            import login_decorator
 
 class RoleId(Enum):
@@ -48,7 +48,11 @@ class CheckId():
     def check_size_id(size_id):
         if not Size.objects.filter(id = size_id).exists():
             raise Size.DoesNotExist
-         
+    
+    def check_tag_id(tag_id):
+        if not Tag.objects.filter(id = tag_id).exists():
+            raise Tag.DoesNotExist
+
 # 메뉴 생성, 상품 전체 조회
 class MenuView(View):
     @login_decorator
@@ -62,16 +66,22 @@ class MenuView(View):
             data = json.loads(request.body)
             category_id = data['category_id']
             badge_id    = data.get('badge_id', BadgeId.NEW.value)
+            tag_id      = data['tag_id']
 
             CheckId.check_category_id(category_id)
             CheckId.check_badge_id(badge_id)
+            CheckId.check_tag_id(tag_id)
 
-            Menu.objects.create(
+            menu = Menu.objects.create(
                 category_id = category_id,
-                badge_id    = badge_id,
+                badge_id    = badge_id,  
                 name        = data['name'],
-                description = data['description'],               
+                description = data['description'],         
             )
+
+            tag = Tag.objects.get(id = tag_id)
+
+            menu.tags.add(tag)
 
             return JsonResponse({'message' : 'SUCCESS'}, status = 201)
         
@@ -89,7 +99,10 @@ class MenuView(View):
         
         except Badge.DoesNotExist:
             return JsonResponse({'message' : 'INVALID_BADGE_ID'}, status = 400)
-
+        
+        except Tag.DoesNotExist:
+            return JsonResponse({'message' : 'INVALID_TAG_ID'}, status = 400)
+        
     @login_decorator
     def get(self, request):
         try:
@@ -179,7 +192,7 @@ class MenuDetailView(View):
             return JsonResponse({'menu' : menu_info}, status = 200)
         
         except Menu.DoesNotExist :
-            return JsonResponse({'message' : 'MENU_DOES_NOT_EXIST'}, status=404)
+            return JsonResponse({'message' : 'MENU_DOES_NOT_EXIST'}, status = 404)
         
     @login_decorator
     def patch(self, request, menu_id):
@@ -203,9 +216,6 @@ class MenuDetailView(View):
         except JSONDecodeError:
             return JsonResponse({'message' : 'JSON_DECODE_ERROR'}, status = 400)
         
-        except KeyError:
-            return JsonResponse({'message' : 'KEY_ERROR'}, status = 400)
-        
         except Menu.DoesNotExist:
             return JsonResponse({'message' : 'MENU_DOES_NOT_EXIST'}, status = 404)
         
@@ -228,12 +238,6 @@ class MenuDetailView(View):
             menu.save()
 
             return JsonResponse({'message' : 'SUCCESS'}, status = 200)
-        
-        except JSONDecodeError:
-            return JsonResponse({'message' : 'JSON_DECODE_ERROR'}, status = 400)
-        
-        except KeyError:
-            return JsonResponse({'message' : 'KEY_ERROR'}, status = 400)
         
         except Menu.DoesNotExist:
             return JsonResponse({'message' : 'MENU_DOES_NOT_EXIST'}, status = 404)
@@ -313,9 +317,6 @@ class ItemView(View):
         except JSONDecodeError:
             return JsonResponse({'message' : 'JSON_DECODE_ERROR'}, status = 400)
         
-        except KeyError:
-            return JsonResponse({'message' : 'KEY_ERROR'}, status = 400)
-        
         except Item.DoesNotExist:
             return JsonResponse({'message' : 'ITEM_DOES_NOT_EXIST'}, status = 404)
         
@@ -341,12 +342,6 @@ class ItemView(View):
             item.save()
             
             return JsonResponse({'message' : 'SUCCESS'}, status = 200)
-        
-        except JSONDecodeError:
-            return JsonResponse({'message' : 'JSON_DECODE_ERROR'}, status = 400)
-        
-        except KeyError:
-            return JsonResponse({'message' : 'KEY_ERROR'}, status = 400)
         
         except Item.DoesNotExist:
             return JsonResponse({'message' : "ITEM_DOES_NOT_EXIST"}, status = 404)
