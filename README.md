@@ -2,6 +2,29 @@
 
 ## [TEAM] WithCODE
 
+## 본인 소개
+
+안녕하세요.
+
+위코드x원티드 백엔드 프리온보딩과정 교육생 이기용입니다.
+
+해당 Git Repository는 11월 3일 ~ 11월 5일까지 프레시코드 기업과제 내용이 담겨져 있습니다.
+
+최초의 Git Repository링크는 https://github.com/BnDC/freshcode-wanted 이며, 
+
+제 Repository로 Fork를 했습니다.
+
+이번 과제에서 저는 4가지 역할을 맡았으며, 내용은 아래와 같습니다.
+
+1. 로그인 view 작성
+2. 메뉴 추가 view 작성
+3. Postman API 문서 작성
+4. DB설계 및 ERD Diagram 작성
+
+아래엔 구현 내용에 대한 상세설명이 작성되어 있습니다.
+
+읽어주셔서 감사합니다.
+
 ### Members
 
 | 이름   | github                         |
